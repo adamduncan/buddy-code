@@ -1,0 +1,50 @@
+/* ----------------------------------------
+Core -- Layout
+---------------------------------------- */
+.wrapper {
+  margin: 0 auto;
+  padding: 0 1.25rem; /* 20px */
+  width: 100%;
+
+  @include media-query($bp--777) {
+    padding: 0 2.188rem; /* 35px */
+  }
+  @include media-query($bp--1039) {
+    padding: 0 4.375rem; /* 70px */
+  }
+  @include media-query($bp--1199) {
+    max-width: 87.5rem; /* 1400px */
+  }
+}
+.width--1-3 {
+  width: 33.333334%;
+}
+.width--1-2 {
+  width: 50%;
+}
+.width--2-3 {
+  width: 66.666667%;
+}
+.width--fll {
+  width: 100%;
+}
+@include media-query($bp--777) {
+  .width--1-6_bp--777 {
+    width: 16.666667%;
+  }
+  .width--1-3_bp--777 {
+    width: 33.333334%;
+  }
+  .width--1-2_bp--777 {
+    width: 50%;
+  }
+  .width--2-3_bp--777 {
+    width: 66.666667%;
+  }
+  .width--5-6_bp--777 {
+    width: 83.333334%;
+  }
+  .push--1-6_bp--777 {
+  	margin-left: 16.666667%;
+  }
+}

@@ -1,10 +1,12 @@
-@import "partial";
+/* ----------------------------------------
+For: Droga5 - Asahi
+By: P Robelou Consulting Limited
+---------------------------------------- */
 
-body {
-  margin: 0;
-}
+@import "_reset";
+@import "_base";
+@import "_mixins";
 
-img {
-  height: auto;
-  width: 100%;
-}
+@import "_core-settings";
+@import "_core-grid";
+@import "_core-layout";

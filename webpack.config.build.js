@@ -16,10 +16,11 @@ const styles = {
     fallback: 'style-loader',
     use: [
       {
-        loader: 'css-loader'
+        loader: 'css-loader?sourceMap',
+        options: {minimize: true} //minify css
       },
       {
-        loader: 'sass-loader'
+        loader: 'sass-loader?sourceMap'
       },
     ]
   }),
@@ -35,31 +36,45 @@ const javascript = {
   ],
   exclude: /(node_modules|build)/
 };
+const images = {
+  test: /\.(jpe?g|png|gif|svg)$/,
+  use: [
+    {
+      loader: 'url-loader',
+      options: {
+        limit: 8000, // Convert images < 8kb to base64 strings
+        name: '[name]-[hash:7].[ext]',
+        outputPath: 'assets/',
+        publicPath: 'assets/'
+      }
+    }
+  ],
+  exclude: /(node_modules|build)/
+};
 
 // Plugins
 const cleanBuild = new CleanWebpackPlugin(['build']); // Remove existing build folder
-const extractCSS = new ExtractTextPlugin('styles/styles.css'); // Create css file
+const extractCSS = new ExtractTextPlugin('styles/styles.[chunkhash].min.css'); // Create css file
+const minifyJS = new webpack.optimize.UglifyJsPlugin({sourceMap: true}); // Minify js
 
 const config = {
   entry: {
     main: './src/app.js'
   },
-  devServer: {
-      contentBase: './build',
-      port: 3000
-  },
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/',
-    filename: 'scripts/scripts.js' // Create js bundle
+    filename: 'scripts/scripts.[chunkhash].min.js' // Create js bundle
   },
   module: {
-    rules: [html, styles, javascript]
+    rules: [html, styles, javascript, images]
   },
   plugins: [
     cleanBuild,
     ...pages,
-    extractCSS
+    extractCSS,
+    minifyJS
   ]
 };
 
